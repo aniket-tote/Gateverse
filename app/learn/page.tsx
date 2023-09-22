@@ -22,7 +22,7 @@ const Learn = () => {
       <div className={`flex w-full justify-start`}>
         <Link
           href={"/learn/gate"}
-          className={`p-4 lg:w-1/4 md:w-1/2 w-full bg-[#222222] rounded-lg flex-col hover:border-b-4 hover:border-[#4E8E8E]`}
+          className={`p-4 lg:w-1/4 md:w-1/2 w-full bg-[#222222] rounded-lg flex-col border-b-4 border-transparent hover:border-[#4E8E8E]`}
         >
           <span className="font-semibold">GATE</span>
         </Link>

@@ -2,7 +2,7 @@
 
 import { useColorMode } from "@/context/ColorModeContext";
 import Link from "next/link";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { BiSun, BiMoon } from "react-icons/bi";
 
 const Navbar = () => {
@@ -44,11 +44,11 @@ const Navbar = () => {
       </div>
       <div className="right flex space-x-6">
         <div
-          className={`navoptions flex md:space-x-11 flex-col md:items-center md:flex-row absolute md:relative md:translate-x-0 left-0 md:top-0 top-14 space-y-4 md:space-y-0 p-2 md:p-0 w-full md:w-max duration-500 transition-transform ease-in-out ${
+          className={`navoptions bg-[#222222] flex md:space-x-11 flex-col md:items-center md:flex-row absolute md:relative md:translate-x-0 left-0 md:top-0 top-14 space-y-4 md:space-y-0 p-2 md:p-0 w-full md:w-max duration-500 transition-transform ease-in-out ${
             navOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <Link href="/learn">
+          <Link href="/learn/gate">
             <span className="hover:text-[#4E8E8E] font-semibold">Learn</span>
           </Link>
           <Link href="/practice">
