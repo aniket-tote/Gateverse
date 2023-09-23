@@ -2,13 +2,16 @@
 
 import Sidebar from "@/components/Sidebar";
 import { useColorMode } from "@/context/ColorModeContext";
-import React from "react";
+import React, { use, useState } from "react";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { createClient } from "next-sanity";
 
 const Gate = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const response = use(getData());
+  const { colorMode } = useColorMode();
 
-  const [isSideOpen, setIsSideOpen] = React.useState(true);
+  const [isSideOpen, setIsSideOpen] = useState(true);
+  // const subjects = response.props.subjects;
 
   const subjects = {
     Mathematics: ["first order logic", "sets", "relations", "functions"],
@@ -40,7 +43,7 @@ const Gate = () => {
       >
         <div className="flex w-full justify-start p-1">
           <div
-            className={`rounded bg-[#222] w-8 h-8 font-bold text-xl grid place-items-center`}
+            className={`rounded bg-[#222] w-8 cursor-pointer h-8 font-bold text-xl grid place-items-center`}
             onClick={() => {
               setIsSideOpen((prev) => (prev ? false : true));
             }}
@@ -64,3 +67,5 @@ const Gate = () => {
 };
 
 export default Gate;
+
+

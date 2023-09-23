@@ -2,12 +2,26 @@
 
 import { useColorMode } from "@/context/ColorModeContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { BiSun, BiMoon } from "react-icons/bi";
+import { MdOutlineArrowDropUp } from "react-icons/md";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const router = useRouter();
+
   const [navOpen, setNavOpen] = useState(false);
+  const [showLearnDropdown, setShowLearnDropdown] = useState(false);
+  const [showLearnDropdownMobile, setShowLearnDropdownMobile] = useState(false);
+
+  const handleLearnHover = () => {
+    setShowLearnDropdown(true);
+  };
+
+  const handleLearnLeave = () => {
+    setShowLearnDropdown(false);
+  };
 
   return (
     <div
@@ -19,7 +33,7 @@ const Navbar = () => {
     >
       <div className="logo flex items-center space-x-3">
         <div
-          className={`hamburger w-5 flex items-center flex-col space-y-1 md:hidden mr-2`}
+          className={`hamburger w-5 flex cursor-pointer items-center flex-col space-y-1 md:hidden mr-2`}
           onClick={() => setNavOpen(!navOpen)}
         >
           <div
@@ -44,21 +58,96 @@ const Navbar = () => {
       </div>
       <div className="right flex space-x-6">
         <div
-          className={`navoptions bg-[#222222] flex md:space-x-11 flex-col md:items-center md:flex-row absolute md:relative md:translate-x-0 left-0 md:top-0 top-14 space-y-4 md:space-y-0 p-2 md:p-0 w-full md:w-max duration-500 transition-transform ease-in-out ${
+          className={`navoptions flex md:space-x-11 flex-col md:items-center md:flex-row absolute md:relative md:translate-x-0 left-0 md:top-0 top-14 w-full md:w-max duration-500 transition-transform ease-in-out ${
             navOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          } ${colorMode === "dark" ? "bg-[#222222]" : "bg-white"}`}
         >
-          <Link href="/learn/gate">
-            <span className="hover:text-[#4E8E8E] font-semibold">Learn</span>
-          </Link>
-          <Link href="/practice">
-            <span className="hover:text-[#4E8E8E] font-semibold">Practice</span>
-          </Link>
-          <Link href="/contact">
-            <span className="hover:text-[#4E8E8E] font-semibold">
-              Contact Us
-            </span>
-          </Link>
+          <div>
+            <button
+              onMouseEnter={handleLearnHover}
+              onClick={() => {
+                setShowLearnDropdownMobile(!showLearnDropdownMobile);
+              }}
+              className="hover:text-[#4E8E8E] cursor-pointer font-semibold flex justify-between w-full md:w-max px-4 py-2 md:p-0"
+            >
+              <span>Learn</span>
+              <span
+                className={`hidden md:inline text-2xl transition-all duration-500 ease-in-out  ${
+                  showLearnDropdown ? "rotate-0" : "rotate-180"
+                }`}
+              >
+                <MdOutlineArrowDropUp />
+              </span>
+              <span
+                className={`md:hidden text-2xl transition-all duration-500 ease-in-out  ${
+                  showLearnDropdownMobile ? "rotate-0" : "rotate-180"
+                }`}
+              >
+                <MdOutlineArrowDropUp />
+              </span>
+            </button>
+            {showLearnDropdown && (
+              <div
+                onMouseEnter={handleLearnHover}
+                onMouseLeave={handleLearnLeave}
+                className={`hidden md:inline absolute -left-3 mt-4 border rounded shadow-lg w-48 z-10 ${
+                  colorMode === "dark"
+                    ? "bg-[#222] md:border-[#444]"
+                    : "bg-white"
+                }`}
+              >
+                <div
+                  className="cursor-pointer hover:font-semibold p-2"
+                  onClick={() => {
+                    router.push("/learn/gate");
+                  }}
+                >
+                  <span>Gate</span>
+                </div>
+                <div
+                  className="cursor-pointer hover:font-semibold p-2"
+                  onClick={() => {}}
+                >
+                  <span>Course 2</span>
+                </div>
+                <div className="w-full h-0.5  bg-[#438383]"></div>
+              </div>
+            )}
+            {/* for mobile */}
+            <div
+              className={`bg-[#333] md:hidden transition-all text-sm overflow-y-hidden duration-500 ease-in-out ${
+                showLearnDropdownMobile ? "h-max" : " h-0"
+              }`}
+            >
+              <ul>
+                <li className="py-2 px-4 hover:font-semibold cursor-pointer">
+                  Gate
+                </li>
+                <li className="py-2 px-4 hover:font-semibold cursor-pointer">
+                  Course 2
+                </li>
+                <li className="w-full h-0.5  bg-[#438383]"></li>
+              </ul>
+            </div>
+          </div>
+          <div
+            className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"
+            onMouseEnter={handleLearnLeave}
+            onClick={() => {
+              router.push("/practice");
+            }}
+          >
+            <span className="">Practice</span>
+          </div>
+          <div
+            className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"
+            onMouseEnter={handleLearnLeave}
+            onClick={() => {
+              router.push("/contact");
+            }}
+          >
+            <span className="">Contact Us</span>
+          </div>
         </div>
         <div
           className={`w-9 h-9 cursor-pointer font-semibold rounded-full flex justify-center items-center text-2xl ${

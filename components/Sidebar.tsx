@@ -1,6 +1,18 @@
+"use client";
+
 import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
 import { MdOutlineArrowDropUp } from "react-icons/md";
+
+// interface Subject {
+//   _type: string;
+//   name: string;
+//   course: string;
+//   _id: string;
+//   _updatedAt: string;
+//   _createdAt: string;
+//   _rev: string;
+// }
 
 interface Subjects {
   [key: string]: string[];
@@ -40,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
         {Object.keys(subjects).map((subject) => (
           <li key={subject} className="">
             <button
-              className={`flex items-center justify-between w-full p-2 hover:bg-[#333] hover:text-[#4e8e8e] transition-transform transform ${
+              className={`flex items-center justify-between w-full p-2 hover:bg-[#333] hover:text-[#4e8e8e]  ${
                 colorMode === "dark"
                   ? `${isSubjectOpen(subject) ? "bg-[#333]" : "bg-[#222]"}`
                   : `${isSubjectOpen(subject) ? "bg-[#ddd]" : "bg-[#fff]"}`
@@ -49,13 +61,9 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
             >
               <span>{subject}</span>
               <span
-                className={`text-2xl transition-all duration-500 ease-in-out  
-                                ${
-                                  isSubjectOpen(subject)
-                                    ? "rotate-0"
-                                    : "rotate-180"
-                                }
-                            `}
+                className={`text-2xl transition-transform duration-500 ease-in-out  ${
+                  isSubjectOpen(subject) ? "rotate-0" : "rotate-180"
+                }`}
               >
                 <MdOutlineArrowDropUp />
               </span>
