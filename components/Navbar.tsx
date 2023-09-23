@@ -99,6 +99,7 @@ const Navbar = () => {
                 <div
                   className="cursor-pointer hover:font-semibold p-2"
                   onClick={() => {
+                    setNavOpen(!navOpen);
                     router.push("/learn/gate");
                   }}
                 >
@@ -106,7 +107,9 @@ const Navbar = () => {
                 </div>
                 <div
                   className="cursor-pointer hover:font-semibold p-2"
-                  onClick={() => {}}
+                  onClick={() => {
+                    setNavOpen(!navOpen);
+                  }}
                 >
                   <span>Course 2</span>
                 </div>
@@ -119,21 +122,33 @@ const Navbar = () => {
                 showLearnDropdownMobile ? "h-max" : " h-0"
               }`}
             >
-              <ul>
-                <li className="py-2 px-4 hover:font-semibold cursor-pointer">
-                  Gate
-                </li>
-                <li className="py-2 px-4 hover:font-semibold cursor-pointer">
-                  Course 2
-                </li>
-                <li className="w-full h-0.5  bg-[#438383]"></li>
-              </ul>
+              <div
+                className="py-2 px-4 hover:font-semibold cursor-pointer"
+                onClick={() => {
+                  setNavOpen(!navOpen);
+                  router.push("/learn/gate");
+                  setShowLearnDropdownMobile(!showLearnDropdownMobile);
+                }}
+              >
+                Gate
+              </div>
+              <div
+                className="py-2 px-4 hover:font-semibold cursor-pointer"
+                onClick={() => {
+                  setNavOpen(!navOpen);
+                  setShowLearnDropdownMobile(!showLearnDropdownMobile);
+                }}
+              >
+                Course 2
+              </div>
+              <li className="w-full h-0.5  bg-[#438383]"></li>
             </div>
           </div>
           <div
             className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"
             onMouseEnter={handleLearnLeave}
             onClick={() => {
+              setNavOpen(!navOpen);
               router.push("/practice");
             }}
           >
@@ -143,6 +158,7 @@ const Navbar = () => {
             className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"
             onMouseEnter={handleLearnLeave}
             onClick={() => {
+              setNavOpen(!navOpen);
               router.push("/contact");
             }}
           >
