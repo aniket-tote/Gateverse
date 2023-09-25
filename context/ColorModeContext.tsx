@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, use, useContext } from "react";
 
 const ColorModeContext = createContext({
   colorMode: "dark",

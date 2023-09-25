@@ -2,17 +2,7 @@
 
 import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
-import { MdOutlineArrowDropUp } from "react-icons/md";
-
-// interface Subject {
-//   _type: string;
-//   name: string;
-//   course: string;
-//   _id: string;
-//   _updatedAt: string;
-//   _createdAt: string;
-//   _rev: string;
-// }
+import { MdOutlineArrowBackIosNew, MdOutlineArrowDropUp } from "react-icons/md";
 
 interface Subjects {
   [key: string]: string[];
@@ -20,11 +10,12 @@ interface Subjects {
 
 interface SidebarProps {
   subjects: Subjects;
-  isSideOpen: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const [isSideOpen, setIsSideOpen] = useState(true);
 
   const [openSubjects, setOpenSubjects] = useState<string[]>([]);
 
@@ -44,18 +35,55 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
 
   return (
     <div
-      className={`overflow-y-auto transition-all duration-500 ease-in-out ${
-        isSideOpen ? "w-4/5 sm:w-1/2 md:w-1/3 lg:w-2/12" : "w-0"
-      } ${colorMode === "dark" ? "bg-[#222]" : "#eee"}`}
+      className={`overflow-y-auto transition-[width] duration-500 ease-in-out ${
+        isSideOpen ? "w-4/5 sm:w-1/2 md:w-1/3 lg:w-2/12" : "w-12"
+      } ${
+        colorMode === "dark"
+          ? "bg-[#222] text-white"
+          : "bg-[#fff] text-slate-950"
+      }`}
     >
-      <ul>
+      <div className={`flex w-full justify-between items-center p-1 `}>
+        <span
+          className={`text-xl font-semibold ${
+            isSideOpen ? "inline" : "hidden"
+          }`}
+        >
+          Gate
+        </span>
+        <div
+          className={`rounded w-10 cursor-pointer h-10 font-bold text-xl grid place-items-center ${
+            colorMode === "dark" ? "hover:bg-[#333]" : "hover:bg-[#eee]"
+          }`}
+          onClick={() => {
+            setIsSideOpen((prev) => (prev ? false : true));
+          }}
+        >
+          <span
+            className={` transition-all duration-500 ease-in-out
+            ${isSideOpen ? "rotate-0" : "-rotate-180"}
+            `}
+          >
+            <MdOutlineArrowBackIosNew />
+          </span>
+        </div>
+      </div>
+      <ul className={`${isSideOpen ? "inline" : "hidden"}`}>
         {Object.keys(subjects).map((subject) => (
           <li key={subject} className="">
             <button
-              className={`flex items-center justify-between w-full p-2 hover:bg-[#333] hover:text-[#4e8e8e]  ${
+              className={`flex items-center justify-between w-full p-2 hover:text-[#4e8e8e]  ${
                 colorMode === "dark"
-                  ? `${isSubjectOpen(subject) ? "bg-[#333]" : "bg-[#222]"}`
-                  : `${isSubjectOpen(subject) ? "bg-[#ddd]" : "bg-[#fff]"}`
+                  ? `${
+                      isSubjectOpen(subject)
+                        ? "bg-[#333] text-[#4e8e8e]"
+                        : "bg-[#222]"
+                    } hover:bg-[#333]`
+                  : `${
+                      isSubjectOpen(subject)
+                        ? "bg-[#eee] text-[#4e8e8e]"
+                        : "bg-[#fff]"
+                    } hover:bg-[#eee]`
               } `}
               onClick={() => toggleSubject(subject)}
             >
@@ -68,11 +96,15 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
                 <MdOutlineArrowDropUp />
               </span>
             </button>
-            <div className="w-full h-[0.07rem] bg-[#444]"></div>
             <div
-              className={`bg-[#333] transition-all text-sm overflow-y-hidden duration-500 ease-in-out ${
-                isSubjectOpen(subject) ? "h-max" : " h-0"
+              className={`w-full h-[0.07rem] ${
+                colorMode === "dark" ? "bg-[#444]" : "bg-[#ccc]"
               }`}
+            ></div>
+            <div
+              className={` transition-all text-sm overflow-y-hidden duration-500 ease-in-out ${
+                colorMode === "dark" ? "bg-[#333]" : "bg-[#eee]"
+              } ${isSubjectOpen(subject) ? "h-max" : " h-0"}`}
             >
               <ul>
                 {subjects[subject].map((topic) => (
@@ -83,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects, isSideOpen }) => {
                     {topic}
                   </li>
                 ))}
-                <li className="w-full h-0.5  bg-[#438383]"></li>
+                <li className="w-full h-0.5 bg-[#438383]"></li>
               </ul>
             </div>
           </li>
