@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 
 const ubuntu = Ubuntu({
   weight: ["400"],
-  display: "fallback",
+  display: "auto",
   subsets: ["latin"],
 });
 

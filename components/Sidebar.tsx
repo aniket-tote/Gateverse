@@ -4,16 +4,16 @@ import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowDropUp } from "react-icons/md";
 
-interface Subjects {
+interface dataObject {
   [key: string]: string[];
 }
 
 interface SidebarProps {
-  subjects: Subjects;
+  dataObject: dataObject;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
+  const { colorMode } = useColorMode();
 
   const [isSideOpen, setIsSideOpen] = useState(true);
 
@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
 
   return (
     <div
-      className={`overflow-y-auto transition-[width] duration-500 ease-in-out ${
+      className={`overflow-y-auto scrollbar scrollbar-w-1 scrollbar-thumb-rounded-md scrollbar-thumb-[#4e8e8e] scrollbar-track-[#222] transition-[width] duration-500 ease-in-out ${
         isSideOpen ? "w-4/5 sm:w-1/2 md:w-1/3 lg:w-2/12" : "w-12"
       } ${
         colorMode === "dark"
@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
         </div>
       </div>
       <ul className={`${isSideOpen ? "inline" : "hidden"}`}>
-        {Object.keys(subjects).map((subject) => (
+        {Object.keys(dataObject).map((subject) => (
           <li key={subject} className="">
             <button
               className={`flex items-center justify-between w-full p-2 hover:text-[#4e8e8e]  ${
@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
               } `}
               onClick={() => toggleSubject(subject)}
             >
-              <span>{subject}</span>
+              <span className="text-sm">{subject}</span>
               <span
                 className={`text-2xl transition-transform duration-500 ease-in-out  ${
                   isSubjectOpen(subject) ? "rotate-0" : "rotate-180"
@@ -107,9 +107,9 @@ const Sidebar: React.FC<SidebarProps> = ({ subjects }) => {
               } ${isSubjectOpen(subject) ? "h-max" : " h-0"}`}
             >
               <ul>
-                {subjects[subject].map((topic) => (
+                {dataObject[subject].map((topic) => (
                   <li
-                    className="py-2 px-4 hover:font-semibold cursor-pointer"
+                    className="py-2 px-4 hover:font-medium cursor-pointer"
                     key={topic}
                   >
                     {topic}
