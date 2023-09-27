@@ -3,9 +3,31 @@
 import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowDropUp } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
+// interface subject {
+//   name: string;
+//   _id: string;
+//   _rev: string;
+//   _type: string;
+//   _createdAt: string;
+//   _updatedAt: string;
+//   course: {
+//     _ref: string;
+//     _type: string;
+//   };
+//   slug: {
+//     _type: string;
+//     current: string;
+//   };
+// }
+
+interface dataItem {
+  name: string;
+  slug: string;
+}
 interface dataObject {
-  [key: string]: string[];
+  [key: string]: dataItem[];
 }
 
 interface SidebarProps {
@@ -20,6 +42,8 @@ const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
   const [openSubjects, setOpenSubjects] = useState<string[]>([]);
 
   const isSubjectOpen = (subject: string) => openSubjects.includes(subject);
+
+  const router = useRouter();
 
   const toggleSubject = (subject: string) => {
     setOpenSubjects((prevOpenSubjects) => {
@@ -106,17 +130,20 @@ const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
                 colorMode === "dark" ? "bg-[#333]" : "bg-[#eee]"
               } ${isSubjectOpen(subject) ? "h-max" : " h-0"}`}
             >
-              <ul>
-                {dataObject[subject].map((topic) => (
-                  <li
+              {dataObject[subject].map((item) => {
+                return (
+                  <div
                     className="py-2 px-4 hover:font-medium cursor-pointer"
-                    key={topic}
+                    key={item.slug}
+                    onClick={() => {
+                      router.push(item.slug);
+                    }}
                   >
-                    {topic}
-                  </li>
-                ))}
-                <li className="w-full h-0.5 bg-[#438383]"></li>
-              </ul>
+                    {item.name}
+                  </div>
+                );
+              })}
+              <div className="w-full h-0.5 bg-[#438383]"></div>
             </div>
           </li>
         ))}

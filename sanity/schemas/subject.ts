@@ -16,5 +16,14 @@ export default defineType({
       type: "reference",
       to: { type: "course" },
     }),
+    {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "name",
+        maxLength: 200,
+      },
+    },
   ],
 });

@@ -6,10 +6,18 @@ import React from "react";
 import Dashboard from "@/components/Dashboard";
 import { client } from "@/sanity/lib/client";
 import { subjectQuery } from "@/sanity/lib/queries";
+import { usePathname } from "next/navigation";
+
+interface dataItem {
+  name: string;
+  slug: string;
+}
 
 const Gate = () => {
   // const result = await client.fetch(subjectAndSubtopicQuery);
   const { data, error, isLoading } = useSWR(subjectQuery, getData);
+
+  const pathname = usePathname();
 
   if (isLoading) {
     return (
@@ -19,11 +27,17 @@ const Gate = () => {
     );
   }
 
-  const subjectTopicMap: Record<string, string[]> = {};
+  const subjectTopicMap: Record<string, dataItem[]> = {};
 
   data.forEach((subject: any) => {
-    const subjectName = subject.name;
-    subjectTopicMap[subjectName] = [`Tutorial - ${subjectName}`,`Previous Year Question`,`Last Minute Notes`];
+    subjectTopicMap[subject.name] = [
+      {
+        name: "Tutorial - " + subject.name,
+        slug: pathname + "/" + subject.slug.current,
+      },
+      { name: "Previous Year Question", slug: "/previous-year-question/" },
+      { name: "last minute notes", slug: "/last-minute-notes" },
+    ];
   });
 
   return (
