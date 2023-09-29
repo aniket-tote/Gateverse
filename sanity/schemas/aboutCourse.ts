@@ -1,28 +1,13 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "blogPost",
-  title: "Blog Post",
+  name: "aboutCourse",
+  title: "About Course",
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-    }),
-    defineField({
-      name: "publishedAt",
-      title: "Published at",
-      type: "datetime",
-    }),
-    defineField({
-      name: "metaDescription",
-      title: "metaDescription",
-      type: "text",
-    }),
-    defineField({
-      name: "body",
-      title: "Body",
+      name: "description",
+      title: "Description",
       type: "array",
       of: [
         {
@@ -55,24 +40,10 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "author",
-      title: "Author",
+      name: "course",
+      title: "Course",
       type: "reference",
-      to: [{ type: "author" }],
-    }),
-    defineField({
-      name: "coverImage",
-      title: "Cover Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: "subtopic",
-      title: "Subtopic",
-      type: "reference",
-      to: { type: "subtopic" }, // Reference to the Subtopic document
+      to: [{ type: "course" }],
     }),
   ],
 });

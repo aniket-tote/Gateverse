@@ -3,7 +3,7 @@
 import { useColorMode } from "@/context/ColorModeContext";
 import React from "react";
 
-const Dashboard = () => {
+const Dashboard = (description: any) => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <div
@@ -13,7 +13,7 @@ const Dashboard = () => {
           : "bg-[#eee] text-slate-900"
       }`}
     >
-      Dashboard
+      {JSON.stringify(description.description)}
     </div>
   );
 };

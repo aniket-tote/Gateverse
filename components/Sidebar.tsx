@@ -3,7 +3,7 @@
 import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowDropUp } from "react-icons/md";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 // interface subject {
 //   name: string;
@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 //   };
 // }
 
-interface dataItem {
+export interface dataItem {
   name: string;
   slug: string;
 }
@@ -37,13 +37,14 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
   const { colorMode } = useColorMode();
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [isSideOpen, setIsSideOpen] = useState(true);
 
   const [openSubjects, setOpenSubjects] = useState<string[]>([]);
 
   const isSubjectOpen = (subject: string) => openSubjects.includes(subject);
-
-  const router = useRouter();
 
   const toggleSubject = (subject: string) => {
     setOpenSubjects((prevOpenSubjects) => {

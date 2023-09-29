@@ -100,7 +100,7 @@ const Navbar = () => {
                   className="cursor-pointer hover:font-semibold p-2"
                   onClick={() => {
                     setNavOpen(!navOpen);
-                    router.push("/learn/gate");
+                    router.push("/gate");
                   }}
                 >
                   <span>Gate</span>
@@ -126,7 +126,7 @@ const Navbar = () => {
                 className="py-2 px-4 hover:font-semibold cursor-pointer"
                 onClick={() => {
                   setNavOpen(!navOpen);
-                  router.push("/learn/gate");
+                  router.push("/gate");
                   setShowLearnDropdownMobile(!showLearnDropdownMobile);
                 }}
               >
