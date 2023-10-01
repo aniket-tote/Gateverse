@@ -2,8 +2,9 @@
 
 import { useColorMode } from "@/context/ColorModeContext";
 import React from "react";
+import { PortableText } from "@portabletext/react";
 
-const Dashboard = (description: any) => {
+const Dashboard = ({ text }: { text: any }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <div
@@ -13,7 +14,7 @@ const Dashboard = (description: any) => {
           : "bg-[#eee] text-slate-900"
       }`}
     >
-      {JSON.stringify(description.description)}
+      <PortableText value={text.content} />
     </div>
   );
 };

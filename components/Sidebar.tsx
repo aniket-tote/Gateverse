@@ -32,9 +32,15 @@ interface dataObject {
 
 interface SidebarProps {
   dataObject: dataObject;
+  isAboutOpen?: boolean;
+  toggleAbout?: (value: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  dataObject,
+  isAboutOpen,
+  toggleAbout,
+}) => {
   const { colorMode } = useColorMode();
 
   const router = useRouter();
@@ -60,12 +66,12 @@ const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
 
   return (
     <div
-      className={`overflow-y-auto scrollbar scrollbar-w-1 scrollbar-thumb-rounded-md scrollbar-thumb-[#4e8e8e] scrollbar-track-[#222] transition-[width] duration-500 ease-in-out ${
+      className={`overflow-y-auto scrollbar scrollbar-w-1 scrollbar-thumb-rounded-md scrollbar-thumb-[#4e8e8e] transition-[width] duration-500 ease-in-out ${
         isSideOpen ? "w-4/5 sm:w-1/2 md:w-1/3 lg:w-2/12" : "w-12"
       } ${
         colorMode === "dark"
-          ? "bg-[#222] text-white"
-          : "bg-[#fff] text-slate-950"
+          ? "bg-[#222] text-white scrollbar-track-[#222]"
+          : "bg-[#fff] text-slate-950 scrollbar-track-[#eee]"
       }`}
     >
       <div className={`flex w-full justify-between items-center p-1 `}>
@@ -93,6 +99,49 @@ const Sidebar: React.FC<SidebarProps> = ({ dataObject }) => {
           </span>
         </div>
       </div>
+      {toggleAbout && (
+        <div className={`flex-col ${isSideOpen ? "flex" : "hidden"}`}>
+          <button
+            className={`flex justify-start w-full p-2 hover:text-[#4e8e8e]  ${
+              colorMode === "dark"
+                ? `${
+                    isAboutOpen ? "bg-[#333] text-[#4e8e8e]" : "bg-[#222]"
+                  } hover:bg-[#333]`
+                : `${
+                    isAboutOpen ? "bg-[#eee] text-[#4e8e8e]" : "bg-[#fff]"
+                  } hover:bg-[#eee]`
+            } `}
+            onClick={() => {
+              toggleAbout(true);
+            }}
+          >
+            <span>
+              What is{" "}
+              {pathname
+                .substring(1, 2)
+                .toLocaleUpperCase()
+                .concat(pathname.substring(2))}{" "}
+              ?
+            </span>
+          </button>
+          <button
+            className={`flex justify-start w-full p-2 hover:text-[#4e8e8e]  ${
+              colorMode === "dark"
+                ? `${
+                    !isAboutOpen ? "bg-[#333] text-[#4e8e8e]" : "bg-[#222]"
+                  } hover:bg-[#333]`
+                : `${
+                    !isAboutOpen ? "bg-[#eee] text-[#4e8e8e]" : "bg-[#fff]"
+                  } hover:bg-[#eee]`
+            } `}
+            onClick={() => {
+              toggleAbout(false);
+            }}
+          >
+            <span>Syllabus</span>
+          </button>
+        </div>
+      )}
       <ul className={`${isSideOpen ? "inline" : "hidden"}`}>
         {Object.keys(dataObject).map((subject) => (
           <li key={subject} className="">

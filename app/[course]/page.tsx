@@ -14,6 +14,12 @@ const Course = ({ params }: { params: { course: string } }) => {
     getData
   );
 
+  const [isAboutOpen, setIsAboutOpen] = React.useState<boolean>(true);
+
+  const toggleAbout = (value: boolean) => {
+    setIsAboutOpen(value);
+  };
+
   if (isLoading) {
     return (
       <div className={`w-full h-full gird place-items-center`}>
@@ -27,8 +33,8 @@ const Course = ({ params }: { params: { course: string } }) => {
       </div>
     );
   } else {
-    const aboutCourse =
-      data.aboutCourse[0].description[0].children[0].text || "";
+    console.log(data);
+    const aboutCourse = data.aboutCourse[0];
     const syllabus = data.syllabus[0];
 
     const subjectTopicMap: Record<string, dataItem[]> = {};
@@ -46,8 +52,16 @@ const Course = ({ params }: { params: { course: string } }) => {
 
     return (
       <div className={`flex sticky screenMinusNavHeight`}>
-        <Sidebar dataObject={subjectTopicMap} />
-        <Dashboard description={aboutCourse}></Dashboard>
+        <Sidebar
+          dataObject={subjectTopicMap}
+          isAboutOpen={isAboutOpen}
+          toggleAbout={toggleAbout}
+        />
+        {isAboutOpen ? (
+          <Dashboard text={aboutCourse}></Dashboard>
+        ) : (
+          <Dashboard text={syllabus}></Dashboard>
+        )}
       </div>
     );
   }

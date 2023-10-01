@@ -72,14 +72,14 @@ const Navbar = () => {
             >
               <span>Learn</span>
               <span
-                className={`hidden md:inline text-2xl transition-all duration-500 ease-in-out  ${
+                className={`hidden md:inline text-2xl transition-transform duration-500 ease-in-out  ${
                   showLearnDropdown ? "rotate-0" : "rotate-180"
                 }`}
               >
                 <MdOutlineArrowDropUp />
               </span>
               <span
-                className={`md:hidden text-2xl transition-all duration-500 ease-in-out  ${
+                className={`md:hidden text-2xl transition-transform duration-500 ease-in-out  ${
                   showLearnDropdownMobile ? "rotate-0" : "rotate-180"
                 }`}
               >

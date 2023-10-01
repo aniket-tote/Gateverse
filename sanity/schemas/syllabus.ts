@@ -15,27 +15,6 @@ export default defineType({
         },
         {
           type: "image",
-          fields: [
-            {
-              name: "caption",
-              type: "string",
-              title: "Caption",
-              options: {
-                isHighlighted: true,
-              },
-            },
-            {
-              name: "alt",
-              type: "string",
-              title: "Alternative text",
-              options: {
-                isHighlighted: true,
-              },
-            },
-          ],
-          options: {
-            hotspot: true,
-          },
         },
       ],
     }),

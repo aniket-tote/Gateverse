@@ -11,8 +11,8 @@ export const getCourseDetails = (courseName: string) => {
     *[_type == "course" && title == "${courseName}"]{
       title,
       "subjects": *[_type == "subject" && references(^._id)]{name, slug},
-      "syllabus": *[_type == "syllabus" && references(^._id)]{content},
-      "aboutCourse": *[_type == "aboutCourse" && references(^._id)]{description}
+      "syllabus": *[_type == "syllabus" && references(^._id)]{content[]},
+      "aboutCourse": *[_type == "aboutCourse" && references(^._id)]{content[]}
     }[0]
   `;
 };
