@@ -1,8 +1,8 @@
-import { Providers } from "@/components/Provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import ReduxProvider from "@/components/ReduxProvider";
 
 const ubuntu = Ubuntu({
   weight: ["400"],
@@ -20,18 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Gateverse - Learn and try</title>
-        <meta name="description" content="Blog related to gate" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className={ubuntu.className}>
-        <Providers>
+    <ReduxProvider>
+      <html lang="en">
+        <head>
+          <title>Gateverse - Learn and try</title>
+          <meta name="description" content="Blog related to gate" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body className={ubuntu.className}>
           <Navbar />
           {children}
-        </Providers>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ReduxProvider>
   );
 }

@@ -1,11 +1,14 @@
 "use client";
 
-import { useColorMode } from "@/context/ColorModeContext";
 import React from "react";
 import { PortableText } from "@portabletext/react";
+import useColorMode from "@/redux/hooks/useColorMode";
 
 const Dashboard = ({ text }: { text: any }) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
+  console.log(text);
+  console.log(typeof text);
+
   return (
     <div
       className={`w-full p-5 ${

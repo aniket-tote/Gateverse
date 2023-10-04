@@ -1,9 +1,9 @@
 "use client";
 
-import { useColorMode } from "@/context/ColorModeContext";
 import { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowDropUp } from "react-icons/md";
 import { useRouter, usePathname } from "next/navigation";
+import useColorMode from "@/redux/hooks/useColorMode";
 
 // interface subject {
 //   name: string;
@@ -176,7 +176,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               }`}
             ></div>
             <div
-              className={` transition-all text-sm overflow-y-hidden duration-500 ease-in-out ${
+              className={` transition-[height] text-sm overflow-y-hidden duration-500 ease-in-out ${
                 colorMode === "dark" ? "bg-[#333]" : "bg-[#eee]"
               } ${isSubjectOpen(subject) ? "h-max" : " h-0"}`}
             >

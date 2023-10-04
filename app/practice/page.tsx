@@ -1,10 +1,10 @@
 "use client";
 
-import { useColorMode } from "@/context/ColorModeContext";
+import useColorMode from "@/redux/hooks/useColorMode";
 import React from "react";
 
 const Practice = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <div

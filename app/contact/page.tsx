@@ -1,6 +1,6 @@
 "use client";
 
-import { useColorMode } from "@/context/ColorModeContext";
+import useColorMode from "@/redux/hooks/useColorMode";
 import React from "react";
 
 const Contact = () => {
@@ -9,7 +9,7 @@ const Contact = () => {
     message: "",
   });
 
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <section

@@ -1,10 +1,9 @@
 "use client";
 
-import { useColorMode } from "@/context/ColorModeContext";
-import Image from "next/image";
+import useColorMode from "@/redux/hooks/useColorMode";
 
 export default function Home() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <main
