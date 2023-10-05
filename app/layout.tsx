@@ -7,6 +7,7 @@ import ReduxProvider from "@/components/ReduxProvider";
 const ubuntu = Ubuntu({
   weight: ["400"],
   subsets: ["latin"],
+  display: "block",
 });
 
 export const metadata: Metadata = {

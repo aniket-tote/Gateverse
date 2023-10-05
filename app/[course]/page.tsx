@@ -6,6 +6,8 @@ import React from "react";
 import Dashboard from "@/components/Dashboard";
 import { client } from "@/sanity/lib/client";
 import { getCourseDetails } from "@/sanity/lib/queries";
+import Image from "next/image";
+import LoadingSvg from "@/public/loading.svg";
 
 const Course = ({ params }: { params: { course: string } }) => {
   // const result = await client.fetch(subjectAndSubtopicQuery);
@@ -22,8 +24,11 @@ const Course = ({ params }: { params: { course: string } }) => {
 
   if (isLoading) {
     return (
-      <div className={`w-full h-full gird place-items-center`}>
-        <span>Fetching Data...</span>
+      <div className={`w-full screenMinusNavHeight grid place-items-center`}>
+        <div className="flex flex-col">
+          <Image src={LoadingSvg} width={100} height={100} alt="loading" />
+          <span>Fetching Data...</span>
+        </div>
       </div>
     );
   } else if (error) {

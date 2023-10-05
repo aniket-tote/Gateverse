@@ -5,6 +5,8 @@ import { client } from "@/sanity/lib/client";
 import { getTopicAndSubtopicFromSubject } from "@/sanity/lib/queries";
 import React from "react";
 import useSWR from "swr";
+import Image from "next/image";
+import LoadingSvg from "@/public/loading.svg";
 
 const Layout = ({
   children,
@@ -20,7 +22,8 @@ const Layout = ({
 
   if (isLoading) {
     return (
-      <div className={`w-full h-full gird place-items-center`}>
+      <div className={`w-full screenMinusNavHeight grid place-items-center`}>
+        <Image src={LoadingSvg} width={100} height={100} alt="loading" />
         <span>Fetching Data...</span>
       </div>
     );
