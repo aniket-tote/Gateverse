@@ -11,7 +11,7 @@ const Dashboard = ({ text }: { text: any }) => {
 
   return (
     <div
-      className={`w-full p-5 ${
+      className={`overflow-y-auto scrollbar scrollbar-w-1 scrollbar-thumb-rounded-md scrollbar-thumb-[#4e8e8e] w-full p-5 ${
         colorMode === "dark"
           ? "bg-[#131417] text-white"
           : "bg-[#eee] text-slate-900"
