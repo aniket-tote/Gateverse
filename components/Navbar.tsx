@@ -62,87 +62,15 @@ const Navbar = () => {
             navOpen ? "translate-x-0" : "-translate-x-full"
           } ${colorMode === "dark" ? "bg-[#222222]" : "bg-white"}`}
         >
-          <div>
-            <button
-              onMouseEnter={handleLearnHover}
-              onClick={() => {
-                setShowLearnDropdownMobile(!showLearnDropdownMobile);
-              }}
-              className="hover:text-[#4E8E8E] cursor-pointer font-semibold flex justify-between w-full md:w-max px-4 py-2 md:p-0"
-            >
-              <span>Learn</span>
-              <span
-                className={`hidden md:inline text-2xl transition-transform duration-500 ease-in-out  ${
-                  showLearnDropdown ? "rotate-0" : "rotate-180"
-                }`}
-              >
-                <MdOutlineArrowDropUp />
-              </span>
-              <span
-                className={`md:hidden text-2xl transition-transform duration-500 ease-in-out  ${
-                  showLearnDropdownMobile ? "rotate-0" : "rotate-180"
-                }`}
-              >
-                <MdOutlineArrowDropUp />
-              </span>
-            </button>
-            {showLearnDropdown && (
-              <div
-                onMouseEnter={handleLearnHover}
-                onMouseLeave={handleLearnLeave}
-                className={`hidden md:inline absolute -left-3 mt-4 border rounded shadow-lg w-48 z-10 ${
-                  colorMode === "dark"
-                    ? "bg-[#222] md:border-[#444]"
-                    : "bg-white"
-                }`}
-              >
-                <div
-                  className="cursor-pointer hover:font-semibold p-2"
-                  onClick={() => {
-                    setNavOpen(!navOpen);
-                    router.push("/gate");
-                  }}
-                >
-                  <span>Gate</span>
-                </div>
-                <div
-                  className="cursor-pointer hover:font-semibold p-2"
-                  onClick={() => {
-                    setNavOpen(!navOpen);
-                  }}
-                >
-                  <span>Course 2</span>
-                </div>
-                <div className="w-full h-0.5  bg-[#438383]"></div>
-              </div>
-            )}
-            {/* for mobile */}
-            <div
-              className={`bg-[#333] md:hidden transition-all text-sm overflow-y-hidden duration-500 ease-in-out ${
-                showLearnDropdownMobile ? "h-max" : " h-0"
-              }`}
-            >
-              <div
-                className="py-2 px-4 hover:font-semibold cursor-pointer"
-                onClick={() => {
-                  setNavOpen(!navOpen);
-                  router.push("/gate");
-                  setShowLearnDropdownMobile(!showLearnDropdownMobile);
-                }}
-              >
-                Gate
-              </div>
-              <div
-                className="py-2 px-4 hover:font-semibold cursor-pointer"
-                onClick={() => {
-                  setNavOpen(!navOpen);
-                  setShowLearnDropdownMobile(!showLearnDropdownMobile);
-                }}
-              >
-                Course 2
-              </div>
-              <li className="w-full h-0.5  bg-[#438383]"></li>
-            </div>
+          <div
+            className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"
+            onMouseEnter={handleLearnLeave}
+            onClick={() => {
+              setNavOpen(!navOpen);
+              router.push("/gate");
+            }}
+          >
+            <span className="">Learn</span>
           </div>
           <div
             className="hover:text-[#4E8E8E] cursor-pointer font-semibold px-4 py-2 md:p-0"

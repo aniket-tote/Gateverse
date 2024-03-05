@@ -6,8 +6,6 @@ import useColorMode from "@/redux/hooks/useColorMode";
 
 const Dashboard = ({ text }: { text: any }) => {
   const { colorMode } = useColorMode();
-  console.log(text);
-  console.log(typeof text);
 
   return (
     <div
