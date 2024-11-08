@@ -37,7 +37,25 @@ const Contact = () => {
           onSubmit={async (e) => {
             e.preventDefault();
             console.log(details);
-            setDetails({ email: "", message: "" });
+            const response = await fetch(
+              `/api/contact`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(details),
+              }
+            );
+
+            const resData = await response.json();
+
+            if(resData.status == 200){
+              console.log("true");
+              setDetails({ email: "", message: "" });
+            }else{
+              console.log("false");
+            }
           }}
         >
           <div>
